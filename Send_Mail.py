@@ -27,9 +27,13 @@ def send_email(image_path):
     gmail.starttls()
 
     # Replace MAIL_ID and PASSWORD with your credentials
-    gmail.login(MAIL_ID, PASSWORD)  # Ensure MAIL_ID and PASSWORD are defined
+    gmail.login(MAIL_ID, PASSWORD)
+
+    # Ensure MAIL_ID and PASSWORD are defined
     gmail.sendmail(MAIL_ID, MAIL_ID, email_message.as_string())
-    gmail.quit()  # Close the connection
+    # Close the connection
+    gmail.quit()
+
 
 
     

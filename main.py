@@ -1,10 +1,11 @@
 import os
-
 import cv2
 import time
 import  Send_Mail
-from Send_Mail import send_email
 import glob
+from threading import Thread
+
+
 
 video = cv2.VideoCapture(0)
 time.sleep(1)
@@ -12,6 +13,7 @@ time.sleep(1)
 first_frame = None
 status_list = []
 c = 1
+c_count = 0
 
 def clean_folder():
     images = glob.glob("images/*.png")
@@ -32,7 +34,6 @@ while True:
 
     thresh_frame = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]
     dil_frame = cv2.dilate(thresh_frame, None, iterations=2)
-    #cv2.imshow("My Video", dil_frame)
 
     contours, check = cv2.findContours(dil_frame, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -53,14 +54,22 @@ while True:
     status_list = status_list[-2:]
 
     if status_list[0] == 1 and status_list[1] == 0:
-        Send_Mail.send_email(image_with_object)
-        clean_folder()
+        image_with_object = image_with_object.replace("\\", "/")
+        email_thread = Thread(target=Send_Mail.send_email, args=(image_with_object,))
+        email_thread.daemon = True
+        cf = Thread(target=clean_folder)
+        cf.daemon = True
+        email_thread.start()
+        c_count += 1
+        if c_count > 1000:
+            cf.start()
+            c_count = 0
 
-    print(status_list)
     cv2.imshow("Video", frame)
     key = cv2.waitKey(1)
 
     if key == ord("q"):
+        cf.start()
         break
 
 video.release()
