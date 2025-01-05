@@ -2,6 +2,8 @@
 
 A Python application that detects motion using your webcam and sends an email alert with a snapshot of the detected motion. This project uses **OpenCV** for motion detection and **SMTP** for sending email alerts.
 
+(Right now only IDE compactible - Has pottential to integrate with the streamlit frontend)
+
 ---
 
 ## 🛠️ Features
