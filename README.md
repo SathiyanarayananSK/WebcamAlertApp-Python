@@ -26,14 +26,14 @@ A Python application that detects motion using your webcam and sends an email al
 
 ## 📸 Screenshots
 
-![Screenshot 1](https://via.placeholder.com/800x400) <!-- Replace with your screenshot -->
-![Screenshot 2](https://via.placeholder.com/800x400) <!-- Replace with your screenshot -->
+![display1](displayimages/display1.png)
+![display2](displayimages/display2.png)
 
 ---
 
 ## 🎥 Demo
 
-![Demo Video](https://via.placeholder.com/800x400) <!-- Replace with your demo video -->
+[![Watch the video](https://img.youtube.com/vi//0.jpg)]()
 
 ---
 
